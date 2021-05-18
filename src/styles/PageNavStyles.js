@@ -12,6 +12,7 @@ export const PageNavStyles = styled.nav`
   button {
     transform: translateY(-62%);
     border: 2px solid var(--textCol);
+    background-color: var(--backgroundColBright);
     font-size: 1rem;
     font-family: 'Raleway', sans-serif;
     padding: 1rem;
