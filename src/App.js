@@ -12,7 +12,7 @@ import useFetch from './utils/UseFetch';
 
 function App({ AppStyles }) {
   // user search
-  const searchURL = "http://openlibrary.org/search.json?q=underworld";
+  const searchURL = "https://openlibrary.org/search.json?q=underworld";
 
   const [ searchResults, loadingSearchResults ] = useFetch(searchURL);
   const [ books, setBooks ] = useState([]);

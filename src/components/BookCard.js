@@ -82,7 +82,7 @@ const BookCard = ({ book, resultNumber }) => {
 
   const { title, author_name: author, publish_year: publishYear, cover_edition_key: coverOLID } = book;
 
-  const coverURL = coverOLID ? `http://covers.openlibrary.org/b/olid/${coverOLID}-M.jpg` : null;
+  const coverURL = coverOLID ? `https://covers.openlibrary.org/b/olid/${coverOLID}-M.jpg` : null;
 
   const color = 'rgb(30,40,50)'
 
