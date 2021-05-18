@@ -1,0 +1,5 @@
+make sure arrays of things are sorted consistently
+if it's an array of dates, always return the array sorted the same
+
+cors issue on one endpoint when developing locally in react
+
