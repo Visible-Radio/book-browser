@@ -3,6 +3,7 @@ import './App.css';
 import BookCard from './components/BookCard';
 import CardWrapper from './components/CardWrapper';
 import PageNav from './components/PageNav';
+import { separateBooks } from './utils/separateBooks';
 import useFetch from './utils/UseFetch';
 
 // the ISBN endpoint provided in the specs has CORS issues when a request is made from the react
@@ -16,13 +17,13 @@ function App({ AppStyles }) {
 
   const [ searchResults, loadingSearchResults ] = useFetch(searchURL);
   const [ books, setBooks ] = useState([]);
-
-
   const [ currentPage, setCurrentPage ] = useState(0);
   const [ resultsPerPage] = useState(10);
   const [pageCount, setPageCount ] = useState(null);
   const firstIndex = currentPage * resultsPerPage;
   const lastIndex = firstIndex + resultsPerPage;
+  const [ sortDirection, setSortDirection ] = useState(-1);
+  const [ isByFirstEdition, setIsByFirstEdition ] = useState(false);
 
   useEffect(() => {
     if (!loadingSearchResults) {
@@ -45,11 +46,31 @@ function App({ AppStyles }) {
     setCurrentPage(destination);
   }
 
+  // Some books don't have a publish year property
+  // Pull those out before sorting
+  // And then include them at the end of the sorted array
+  const [ booksWithoutDates, booksWithDates ] = separateBooks(books);
+
+  const sortedBooks = [ ...booksWithDates].sort((a, b) => {
+    if (a.publish_year && b.publish_year) {
+      const aIndex = isByFirstEdition ? 0 : a.publish_year.length - 1;
+      const bIndex = isByFirstEdition ? 0 : b.publish_year.length - 1;
+      return (
+        (Number(a.publish_year.sort()[aIndex])
+        - Number(b.publish_year.sort()[bIndex]))
+        * sortDirection
+      );
+    } else {
+      // this shouldn't happen, we pulled out the ones without dates
+      return 0;
+    }
+  }).concat(booksWithoutDates);
+
   return (
     <AppStyles>
       <CardWrapper>
         {
-          books.slice(firstIndex, lastIndex).map((book, i) => {
+          sortedBooks.slice(firstIndex, lastIndex).map((book, i) => {
             return <BookCard resultNumber={i + firstIndex} book={book} key={i} />
           })
         }
