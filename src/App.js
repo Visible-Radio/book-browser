@@ -65,8 +65,6 @@ function App({ AppStyles }) {
     }
   }).concat(booksWithoutDates);
 
-  fetch("https://openlibrary.org/api/volumes/brief/olid/OL30597611M.json").then(resp => resp.json()).then(console.log);
-
   return (
     <AppStyles>
       <CardWrapper>
