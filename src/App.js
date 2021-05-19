@@ -3,7 +3,8 @@ import './App.css';
 import BookCard from './components/BookCard';
 import CardWrapper from './components/CardWrapper';
 import PageNav from './components/PageNav';
-import { separateBooks } from './utils/separateBooks';
+import Search from './components/Search';
+import { sortBooksByDate, sortBooksByTitle } from './utils/sortingFuncs';
 import UseFetch from './utils/UseFetch';
 
 // the ISBN endpoint provided in the specs has CORS issues when a request is made from the browser
@@ -12,17 +13,29 @@ import UseFetch from './utils/UseFetch';
 
 function App({ AppStyles }) {
 
-  const searchURL = "https://openlibrary.org/search.json?q=the+great+gatsby&limit=100&offset=0";
+  const defaultURL = "https://openlibrary.org/search.json?q=the+great+gatsby&limit=100&offset=0";
 
-  const [ searchResults, loadingSearchResults ] = UseFetch(searchURL);
   const [ books, setBooks ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(0);
   const [ resultsPerPage] = useState(10);
-  const [pageCount, setPageCount ] = useState(null);
+  const [ pageCount, setPageCount ] = useState(null);
   const firstIndex = currentPage * resultsPerPage;
   const lastIndex = firstIndex + resultsPerPage;
+  const [ sortMode, setSortMode ] = useState('date')
   const [ sortDirection, setSortDirection ] = useState(-1);
   const [ isByFirstEdition, setIsByFirstEdition ] = useState(true);
+  const [ searchString, setSearchString ] = useState('the great gatsby');
+  const [ searchURL, setSearchURL ] = useState(defaultURL);
+  const [ searchResults, loadingSearchResults ] = UseFetch(searchURL);
+
+  const onSearchChange = (event) => {
+    setSearchString(event.target.value);
+  }
+
+  const onSearchSubmit = () => {
+    const q = searchString.trim().split(' ').join('+');
+    setSearchURL(`https://openlibrary.org/search.json?q=${q}&limit=100&offset=0`);
+  }
 
   useEffect(() => {
     if (!loadingSearchResults) {
@@ -45,28 +58,24 @@ function App({ AppStyles }) {
     setCurrentPage(destination);
   }
 
-  // Some books don't have a publish year property
-  // Pull those out before sorting
-  // And then include them at the end of the sorted array
-  const [ booksWithoutDates, booksWithDates ] = separateBooks(books);
-
-  const sortedBooks = [ ...booksWithDates].sort((a, b) => {
-    if (a.publish_year && b.publish_year) {
-      const aIndex = isByFirstEdition ? 0 : a.publish_year.length - 1;
-      const bIndex = isByFirstEdition ? 0 : b.publish_year.length - 1;
-      return (
-        (Number(a.publish_year.sort()[aIndex])
-        - Number(b.publish_year.sort()[bIndex]))
-        * sortDirection
-      );
-    } else {
-      // this shouldn't happen, we pulled out the ones without dates
-      return 0;
-    }
-  }).concat(booksWithoutDates);
+  const sortedBooks = (sortMode === 'date')
+    ? sortBooksByDate(books, sortDirection, isByFirstEdition)
+    : sortBooksByTitle(books);
 
   return (
     <AppStyles>
+      <Search
+        onSearchChange={onSearchChange}
+        onSearchSubmit={onSearchSubmit}
+        searchString={searchString}
+        setSearchString ={setSearchString}
+        setIsByFirstEdition={setIsByFirstEdition}
+        isByFirstEdition={isByFirstEdition}
+        sortDirection={sortDirection}
+        setSortDirection={setSortDirection}
+        sortMode={sortMode}
+        setSortMode={setSortMode}
+      />
       <CardWrapper>
         {
           sortedBooks.slice(firstIndex, lastIndex).map((book, i) => {

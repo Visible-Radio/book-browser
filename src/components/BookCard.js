@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import sortMixedDateArray from "../utils/sortMixedDateArray";
-import EditionCard from "./EditionCard";
+// import EditionCard from "./EditionCard";
 import { FancyButton } from "./FancyButton";
 
 const BookCardStyles = styled.div`
@@ -16,7 +16,7 @@ const BookCardStyles = styled.div`
   border-radius: var(--borad);
 
   min-height: fit-content;
-  margin: 1rem 0 0 0;
+  margin:  0 0 1rem 0;
   width: 100%;
 
   img {
@@ -87,9 +87,9 @@ const BookCard = ({ book, resultNumber }) => {
   const [ isOpen, setIsOpen ] = useState(false);
   const [ viewEditions, setViewEditions] = useState(false);
 
-  const toggleViewEditions = () => {
-    setViewEditions(!viewEditions);
-  }
+  // const toggleViewEditions = () => {
+  //   setViewEditions(!viewEditions);
+  // }
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -167,7 +167,7 @@ const BookCard = ({ book, resultNumber }) => {
         }
       </ul>
       <div className="rightColumn">
-        { publishDate && publishDate.length > 2 &&
+        { publishDate && editionKey &&
           <FancyButton onClick={toggleOpen} isOpen={isOpen}/>
         }
         <p></p>
