@@ -85,7 +85,7 @@ const BookCardStyles = styled.div`
 
 const BookCard = ({ book, resultNumber }) => {
   const [ isOpen, setIsOpen ] = useState(false);
-  const [ viewEditions, setViewEditions] = useState(false);
+  // const [ viewEditions, setViewEditions] = useState(false);
 
   // const toggleViewEditions = () => {
   //   setViewEditions(!viewEditions);
@@ -95,7 +95,7 @@ const BookCard = ({ book, resultNumber }) => {
     setIsOpen(!isOpen);
   }
 
-  const { title, author_name: author, publish_year: publishYear, cover_edition_key: coverOLID, publish_date: publishDate, edition_key: editionKey } = book;
+  const { title, author_name: author, cover_edition_key: coverOLID, publish_date: publishDate, edition_key: editionKey } = book;
 
   const coverURL = coverOLID ? `https://covers.openlibrary.org/b/olid/${coverOLID}-M.jpg` : null;
 

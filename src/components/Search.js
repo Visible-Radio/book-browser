@@ -35,17 +35,24 @@ const Search = ({
   sortMode,
   setSortMode
 }) => {
-  const [filterIsOpen, setFilterIsOpen] = useState(false);
+  const [ filterIsOpen, setFilterIsOpen] = useState(false);
+  const defaultText = 'Search for a book'
+  const [ placeHolder, setPlaceHolder ] = useState(defaultText);
 
   const optionsBtnRef = useRef(null);
 
   const handleFocus = () => {
     setSearchString("");
+    setPlaceHolder("");
   };
 
   const toggleFilterOpen = () => {
     setFilterIsOpen(!filterIsOpen);
   };
+
+  const onInputBlur = () => {
+    setPlaceHolder(defaultText)
+  }
 
   return (
     <SearchOuterStyles>
@@ -54,6 +61,8 @@ const Search = ({
         type="search"
         onChange={onSearchChange}
         onFocus={handleFocus}
+        onBlur={onInputBlur}
+        placeholder={placeHolder}
       ></SearchStyles>
       <ButtonStyles onClick={onSearchSubmit}>Search</ButtonStyles>
       <ButtonStyles onClick={toggleFilterOpen} ref={optionsBtnRef}>Options</ButtonStyles>
