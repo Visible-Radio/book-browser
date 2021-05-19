@@ -4,18 +4,17 @@ import BookCard from './components/BookCard';
 import CardWrapper from './components/CardWrapper';
 import PageNav from './components/PageNav';
 import { separateBooks } from './utils/separateBooks';
-import useFetch from './utils/UseFetch';
+import UseFetch from './utils/UseFetch';
 
-// the ISBN endpoint provided in the specs has CORS issues when a request is made from the react
-// development server
+// the ISBN endpoint provided in the specs has CORS issues when a request is made from the browser
 // const url_ISBN = `http://openlibrary.org/api/volumes/brief/isbn/${isbn}.json`;
 // const proxy = "https://cors-anywhere.herokuapp.com/";
 
 function App({ AppStyles }) {
-  // user search
-  const searchURL = "https://openlibrary.org/search.json?q=underworld";
 
-  const [ searchResults, loadingSearchResults ] = useFetch(searchURL);
+  const searchURL = "https://openlibrary.org/search.json?q=the+great+gatsby&limit=100&offset=0";
+
+  const [ searchResults, loadingSearchResults ] = UseFetch(searchURL);
   const [ books, setBooks ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(0);
   const [ resultsPerPage] = useState(10);
@@ -23,7 +22,7 @@ function App({ AppStyles }) {
   const firstIndex = currentPage * resultsPerPage;
   const lastIndex = firstIndex + resultsPerPage;
   const [ sortDirection, setSortDirection ] = useState(-1);
-  const [ isByFirstEdition, setIsByFirstEdition ] = useState(false);
+  const [ isByFirstEdition, setIsByFirstEdition ] = useState(true);
 
   useEffect(() => {
     if (!loadingSearchResults) {
@@ -65,6 +64,8 @@ function App({ AppStyles }) {
       return 0;
     }
   }).concat(booksWithoutDates);
+
+  fetch("https://openlibrary.org/api/volumes/brief/olid/OL30597611M.json").then(resp => resp.json()).then(console.log);
 
   return (
     <AppStyles>

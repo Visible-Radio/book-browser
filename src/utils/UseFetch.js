@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetch(url) {
+export default function UseFetch(url) {
   // in development route requests through here...ugh.
   // https://cors-anywhere.herokuapp.com/
   // also found this endpoint which doesn't have cors issues

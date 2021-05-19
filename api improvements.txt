@@ -3,3 +3,9 @@ if it's an array of dates, always return the array sorted the same
 
 cors issue on one endpoint when developing locally in react
 
+search brings up a bunch of results
+for each cluster, when we click the +, let's render some information for each id found in the edition key array
+using the edpoint:
+http://openlibrary.org/api/volumes/brief/olid/OL8457571M.json
+
+this endpoint has cors issues when developing locally though

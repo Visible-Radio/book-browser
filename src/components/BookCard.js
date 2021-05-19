@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
+import sortMixedDateArray from "../utils/sortMixedDateArray";
+import EditionCard from "./EditionCard";
 import { FancyButton } from "./FancyButton";
 
 const BookCardStyles = styled.div`
@@ -68,6 +70,14 @@ const BookCardStyles = styled.div`
     box-shadow: var(--boxShadow);
   }
 
+  .imSad {
+    background-color: black;
+    color: white;
+    border-radius: var(--borad);
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
   @media (max-width: 500px) {
     grid-template-columns: 1fr;
   }
@@ -75,17 +85,25 @@ const BookCardStyles = styled.div`
 
 const BookCard = ({ book, resultNumber }) => {
   const [ isOpen, setIsOpen ] = useState(false);
+  const [ viewEditions, setViewEditions] = useState(false);
+
+  const toggleViewEditions = () => {
+    setViewEditions(!viewEditions);
+  }
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   }
 
-  const { title, author_name: author, publish_year: publishYear, cover_edition_key: coverOLID } = book;
+  const { title, author_name: author, publish_year: publishYear, cover_edition_key: coverOLID, publish_date: publishDate, edition_key: editionKey } = book;
 
   const coverURL = coverOLID ? `https://covers.openlibrary.org/b/olid/${coverOLID}-M.jpg` : null;
 
-  const color = 'rgb(30,40,50)'
+  const color = 'rgb(30,40,50)';
 
+  const sortedDates = publishDate
+    ? sortMixedDateArray([...publishDate])
+    : null;
 
   return (
     <BookCardStyles color={color}>
@@ -103,18 +121,18 @@ const BookCard = ({ book, resultNumber }) => {
         </div>
       <ul className="wrapperColumn">
         <li><h3>{title}</h3></li>
-        <li><p>{author}</p></li>
-        { publishYear && publishYear.length > 1
+        <li><p>{Array.isArray(author) ? author.join(', ') : author}</p></li>
+        { publishDate && publishDate.length > 1
           ?
             <>
-              <li><p>First publication: {publishYear && publishYear.sort()[0]}</p></li>
-              <li><p>Most Recent publication: {publishYear && publishYear.sort()[publishYear.length - 1]}</p></li>
-              { publishYear.length > 2 &&
+              <li><p>First publication: {publishDate && sortedDates[0]}</p></li>
+              <li><p>Most Recent publication: {publishDate && sortedDates[sortedDates.length - 1]}</p></li>
+              { publishDate.length > 2 &&
                 <>
-                  <li><p>This book has {publishYear.length} publication dates on record. Click + to see them all.</p></li>
+                  <li><p>This record refers to {publishDate.length} publication dates. Click + to see them all.</p></li>
                   { isOpen &&
                     <ul>
-                    {publishYear.map((year, i) => {
+                    {sortedDates.map((year, i) => {
                       return <li key={i}>{year}</li>
                     })}
                     </ul>
@@ -122,11 +140,34 @@ const BookCard = ({ book, resultNumber }) => {
                 </>
               }
             </>
-          : <li><p>{publishYear && publishYear[0]}</p></li>
+          : <li><p>{publishDate && sortedDates[0]}</p></li>
+        }
+        { editionKey &&
+          <>
+            <li>
+              <p>This record refers to {editionKey.length} edition{editionKey.length > 1 ? 's' : ''}.</p>
+            </li>
+            { isOpen &&
+              <ul>
+                { editionKey.map((OLID, i) => {
+                  return <li key={i + OLID} value="OLID" onClick={() => console.log(OLID)}>{OLID}
+                      {/* <EditionCard OLID={OLID}/> */}
+                    </li>
+                  })
+                }
+                <li className="imSad">
+                  <p>The API endpoint that serves data for specific edition IDs has not set the Access-Control-Allow-Origin CORS header.</p>
+                  <p>Without building some middleware I cannot access the data necessary to render cards for specific editions.</p>
+                  <p>Try this in the console:</p>
+                  <p><code>fetch("https://openlibrary.org/api/volumes/brief/olid/OL30597611M.json").then(resp => resp.json()).then(console.log);</code></p>
+                </li>
+              </ul>
+            }
+          </>
         }
       </ul>
       <div className="rightColumn">
-        { publishYear && publishYear.length > 2 &&
+        { publishDate && publishDate.length > 2 &&
           <FancyButton onClick={toggleOpen} isOpen={isOpen}/>
         }
         <p></p>
