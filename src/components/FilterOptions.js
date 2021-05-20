@@ -5,7 +5,7 @@ const FilterOptionsStyles = styled.div`
   background-color: var(--backgroundCol);
   top: 100%;
   position: absolute;
-  min-width: 315px;
+  min-width: 90%;
   margin: 0 0.5rem;
   border: 2px solid var(--textCol);
   box-shadow: var(--boxShadow);
