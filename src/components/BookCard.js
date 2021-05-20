@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import sortMixedDateArray from "../utils/sortMixedDateArray";
-// import EditionCard from "./EditionCard";
+import { sortMixedDateArray } from "../utils/sortMixedDateArray";
 import { FancyButton } from "./FancyButton";
+// import EditionCard from "./EditionCard";
 
 const BookCardStyles = styled.div`
   display: grid;
