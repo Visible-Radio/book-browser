@@ -1,12 +1,12 @@
 1. How long did you spend on the coding assignment?
-  * Coding and design of application : Two 8 hour work days.
-  * Ancillary items: 1 8 hour work day.
+	  * Coding and design of application : Two 8 hour work days.
+	  * Ancillary items: 1 8 hour work day.
 
 
-	a. What would you add to your solution if you had more time?
-  * Lazy loading images
-  * Filter by a specific range of publication dates
-  * Build a quick Express proxy application to access API endpoint that doesn't have CORS headers set to permit requests from the browser.
+		a. What would you add to your solution if you had more time?
+	  * Lazy loading images
+	  * Filter by a specific range of publication dates
+	  * Build a quick Express proxy application to access API endpoint that doesn't have CORS headers set to permit requests from the browser.
   * Learn more about testing
 
 2. What was the most useful feature that was added to the latest version of your chosen language? Please include a snippet of code that shows how you've used it.
