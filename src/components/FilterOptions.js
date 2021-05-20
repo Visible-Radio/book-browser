@@ -5,7 +5,8 @@ const FilterOptionsStyles = styled.div`
   background-color: var(--backgroundCol);
   top: 100%;
   position: absolute;
-  min-width: 320px;
+  min-width: 315px;
+  margin: 0 0.5rem;
   border: 2px solid var(--textCol);
   box-shadow: var(--boxShadow);
   padding: var(--pad);
@@ -31,6 +32,16 @@ const FilterOptionsStyles = styled.div`
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  div.dateOptions {
+    border-top: 2px solid var(--textCol);
+    margin: var(--pad) 0;
+    padding: var(--pad) 0;
+
+    p {
+      margin: 0.25rem 0;
+    }
   }
 
   input[type="radio"] {

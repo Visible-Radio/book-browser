@@ -8,10 +8,11 @@ import FilterOptions from "./FilterOptions";
 
 const SearchStyles = styled.input`
   border: 2px solid var(--textCol);
-  margin: 0;
+  margin: var(--buttonMargin);
   font-size: 1rem;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   border-radius: var(--borad);
+  width: var(--textInputWidth);
 
   &:focus {
     outline-offset: 2px;

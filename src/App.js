@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import BookCard from './components/BookCard';
 import CardWrapper from './components/CardWrapper';
 import PageNav from './components/PageNav';
 import Search from './components/Search';
 import { sortBooksByDate, sortBooksByTitle } from './utils/sortingFuncs';
 import UseFetch from './utils/UseFetch';
-
-// the ISBN endpoint provided in the specs has CORS issues when a request is made from the browser
-// const url_ISBN = `http://openlibrary.org/api/volumes/brief/isbn/${isbn}.json`;
-// const proxy = "https://cors-anywhere.herokuapp.com/";
 
 function App({ AppStyles }) {
 

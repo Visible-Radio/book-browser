@@ -15,6 +15,10 @@ const GlobalStyles = createGlobalStyle`
     --pad: 2rem;
     --borad: 2rem;
     --maxWidth: 1200px;
+    --fz: 1rem;
+    --buttonWidth: 100px;
+    --buttonMargin: 0.5rem;
+    --textInputWidth: 200px;
   }
 
   html, body {
@@ -49,6 +53,22 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     display: flex;
     justify-content: center;
+  }
+
+  @media screen and (max-width: 500px) {
+    :root {
+      --fz: 0.75rem;
+      --pad: 1rem;
+      --buttonWidth: 70px;
+      --textInputWidth: 170px;
+    }
+  }
+  @media screen and (max-width: 625px) {
+    :root {
+      --buttonMargin: 0rem 0rem 0.375rem 0rem;
+      --orderAssignEnd: 1;
+      --assignWidth100: 100%;
+    }
   }
 `;
 

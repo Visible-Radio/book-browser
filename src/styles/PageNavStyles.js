@@ -8,11 +8,15 @@ export const PageNavStyles = styled.nav`
   align-items: center;
   justify-content: center;
   border-top: 2px solid var(--myGrey);
+  font-size: var(--fz);
 
-  div {
-    width: 8rem;
+  div.pageReference {
+    width: var(--buttonWidth);
     display: flex;
     justify-content: center;
+    transform: translateY(-70%);
+    order: var(--orderAssignEnd);
+    width: var(--assignWidth100);
   }
 
   span {
@@ -24,13 +28,13 @@ export const ButtonStyles = styled.button`
   ${props => props.offset ? 'transform: translateY(-62%);' : null};
   border: 2px solid var(--textCol);
   background-color: var(--backgroundColBright);
-  font-size: 1rem;
+  font-size: var(--fz);
   font-family: 'Raleway', sans-serif;
-  padding: 1rem;
-  margin: 0.5rem;
+  height: 44px;
+  width: var(--buttonWidth);
+  margin: var(--buttonMargin);
   border-radius: var(--borad);
   transition: all 0.25s;
-  width: 7rem;
   box-shadow: var(--boxShadow);
 
   &:disabled {
