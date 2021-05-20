@@ -3,7 +3,7 @@
   * Ancillary items: 1 8 hour work day.
 
 
-a. What would you add to your solution if you had more time?
+	a. What would you add to your solution if you had more time?
   * Lazy loading images
   * Filter by a specific range of publication dates
   * Build a quick Express proxy application to access API endpoint that doesn't have CORS headers set to permit requests from the browser.
