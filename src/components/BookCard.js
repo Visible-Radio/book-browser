@@ -219,7 +219,7 @@ const BookCard = ({ book, resultNumber }) => {
       <div className="rightColumn">
         {publishDate && editionKey && (
           <div className="expand">
-            <FancyButton onClick={toggleOpen} isOpen={isOpen} />
+            <FancyButton onClick={toggleOpen} isOpen={isOpen} aria-label="expand book card"/>
           </div>
         )}
         <p></p>
