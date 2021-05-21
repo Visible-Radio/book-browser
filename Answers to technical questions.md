@@ -6,16 +6,17 @@
 ## What would you add to your solution if you had more time?
   * Lazy loading images
   * Filter by a specific range of publication dates
+  * Scroll to top when new results are populated or results page is changed
   * Build a quick Express proxy application to access API endpoint that doesn't have CORS headers set to permit requests from the browser.
   * Learn more about testing
 
 ## 2. What was the most useful feature that was added to the latest version of your chosen language? Please include a snippet of code that shows how you've used it.
   * Optional chaining is really conventient, cleans up code and makes it easy to prevent errors when trying to access a property on an object that may or may not exist on an object.
   * The rest operator is nice when passing arrays into functions to avoid mutating the original or when calling array methods like .sort() that mutate the original reference.
-  * The evolution of syntax around promises over the past years is great. Here is a snippet from my [Canvas Destroyer](http://patrickkaipainen.com/) project. The function here is used to control a function that draws an image to a canvas element.
+  * The evolution of syntax around promises over the past years is great. Here is a snippet from my [Canvas Destroyer](http://patrickkaipainen.com/) project. The function here is used to control a function that draws an image to a canvas element. It returns a promise that resolves when the width of the drawn image matches the seek parameter that is passed in.
 
       ````javascript
-      async function animateToWidth(seek) {
+      function animateToWidth(seek) {
         return new Promise((resolve, reject) => {
 
           if (timerId !== null) {
@@ -38,11 +39,12 @@
               draw(currentPermittedWidth, sourceData, ctx, pixelScale);
               setScrubber();
             }
+
           },10)
         })
       }
 
-  *  Then when I call the function somewhere else, I can make sure the animation is complete before doing something else:
+  *  Then when I call the function somewhere else, I can easily make sure the animation is complete before doing something else:
       ````javascript
       await animateToWidth(infoText[infoState].width);
       // do other stuff

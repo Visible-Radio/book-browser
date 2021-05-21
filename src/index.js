@@ -72,21 +72,10 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const AppStyles = styled.div`
-  width: 100vw;
-  height: 100vh;
-  max-width: var(--maxWidth);
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: 1fr;
-`;
-
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyles />
-    <App AppStyles={AppStyles}/>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

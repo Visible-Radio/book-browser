@@ -2,6 +2,7 @@ export const sortBooksByDate = (books, sortDirection, isByFirstEdition) => {
   // Some books don't have a publish year property
   // Pull those out before sorting
   // And then include them at the end of the sorted array
+
   const [ booksWithoutDates, booksWithDates ] = separateBooks(books);
   return [ ...booksWithDates].sort((a, b) => {
     if (a.publish_year && b.publish_year) {
@@ -16,16 +17,17 @@ export const sortBooksByDate = (books, sortDirection, isByFirstEdition) => {
       // this shouldn't happen, we pulled out the ones without dates
       return 0;
     }
-  }).concat(booksWithoutDates)
+  }).concat(booksWithoutDates);
 }
 
 export const separateBooks = (books) => {
+
   const withoutDates = [];
   const withDates = [];
   books.forEach(book => {
-    book.hasOwnProperty('publish_year') ? withDates.push(book) : withoutDates.push(book)
+    book.hasOwnProperty('publish_year') ? withDates.push(book) : withoutDates.push(book);
   })
-  return [withoutDates, withDates ];
+  return [ withoutDates, withDates ];
 }
 
 export const sortBooksByTitle = (books) => {

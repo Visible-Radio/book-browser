@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import BookCard from './components/BookCard';
 import CardWrapper from './components/CardWrapper';
 import PageNav from './components/PageNav';
@@ -6,7 +7,18 @@ import Search from './components/Search';
 import { sortBooksByDate, sortBooksByTitle } from './utils/sortingFuncs';
 import UseFetch from './utils/UseFetch';
 
-function App({ AppStyles }) {
+const AppStyles = styled.div`
+  width: 100vw;
+  height: 100vh;
+  max-width: var(--maxWidth);
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+`;
+
+function App() {
 
   const defaultURL = "https://openlibrary.org/search.json?q=the+great+gatsby&limit=100&offset=0";
 
