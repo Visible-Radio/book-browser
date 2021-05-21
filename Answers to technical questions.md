@@ -1,7 +1,8 @@
 ## 1. How long did you spend on the coding assignment?
 
   * **Coding and design of application** : Two 8 hour work days.
-  * **Ancillary items**: One 8 hour work day.
+  * **Mobile CSS optimizations**: 0.5 work days.
+  * **Learning about testing, implementing testing Lighthouse audit tweaks**: 1.5 work days.
 
 ## What would you add to your solution if you had more time?
   * Lazy loading images
